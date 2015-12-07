@@ -10,10 +10,12 @@ import android.widget.TextView;
 public class MyActivity extends AppCompatActivity {
 
     private EditText number;
-    private Button newgame,ok;
+    private EditText txtarea;
+    private Button newgame,ok,set,exit,about;
     private TextView result;
     private int TheNumber;
     private int Probes=3;
+    public int area=10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +25,9 @@ public class MyActivity extends AppCompatActivity {
         number=(EditText)findViewById(R.id.txtNumber);
         newgame=(Button)findViewById(R.id.BTNewGame);
         ok=(Button)findViewById(R.id.BTOK);
+        set=(Button)findViewById(R.id.BTSet);
+        exit=(Button)findViewById(R.id.BTExit);
+        about=(Button)findViewById(R.id.BTAbout);
         result=(TextView)findViewById(R.id.txtResult);
         TheNumber=GenerateNumber();
 
@@ -66,10 +71,23 @@ public class MyActivity extends AppCompatActivity {
                 Probes=3;
             }
         });
+        set.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int a=Integer.parseInt(txtarea.getText().toString());
+                area=a;
+            }
+        });
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.exit(0);
+            }
+        });
     }
 
     private int GenerateNumber()
     {
-        return (int)(Math.random()*10+1);
+        return (int)(Math.random()*area+1);
     }
 }
