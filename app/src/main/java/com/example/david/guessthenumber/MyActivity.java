@@ -29,15 +29,24 @@ public class MyActivity extends AppCompatActivity {
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 int guess = Integer.parseInt(number.getText().toString());
                 if (guess == TheNumber)
                 {
+                    ok.setEnabled(false);
                     result.setText("Gratulálok! Kitaláltad a számot!");
                 }
                 else
                 {
                     Probes--;
+                    if(guess<TheNumber)
+                    {
+                        result.setText("A szám nagyobb a tippednél!");
+                    }
+                    if(guess>TheNumber)
+                    {
+                        result.setText("A szám kisebb a tippednél!");
+                    }
+
                 }
                 if(Probes==0)
                 {
@@ -46,10 +55,21 @@ public class MyActivity extends AppCompatActivity {
                 }
             }
         });
+
+        newgame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                number.setText("");
+                result.setText("");
+                TheNumber = GenerateNumber();
+                ok.setEnabled(true);
+                Probes=3;
+            }
+        });
     }
 
     private int GenerateNumber()
     {
-        return (int)Math.random()*10+1;
+        return (int)(Math.random()*10+1);
     }
 }
