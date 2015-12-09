@@ -41,17 +41,30 @@ public class MyActivity extends AppCompatActivity {
                             Toast.LENGTH_LONG).show();
                 }
                 else {
-                    int guess = Integer.parseInt(number.getText().toString());
-                    if (guess == TheNumber) {
-                        ok.setEnabled(false);
-                        result.setText("Congrats!");
-                    } else {
-                        if (guess < TheNumber) {
-                            result.setText("The number is GREATER than your tip!");
+                    try {
+                        if (Integer.parseInt(number.getText().toString())>0) {
+                            int guess = Integer.parseInt(number.getText().toString());
+                            if (guess == TheNumber) {
+                                ok.setEnabled(false);
+                                result.setText("Congrats!");
+                            } else {
+                                if (guess < TheNumber) {
+                                    result.setText("The number is GREATER than your tip!");
+                                }
+                                if (guess > TheNumber) {
+                                    result.setText("The number is SMALLER than your tip!");
+                                }
+                            }
                         }
-                        if (guess > TheNumber) {
-                            result.setText("The number is SMALLER than your tip!");
+                        else{
+                            Toast.makeText(getApplicationContext(), "You can type numbers only from 1.",
+                                    Toast.LENGTH_LONG).show();
                         }
+                    }
+                    catch(NumberFormatException e)
+                    {
+                        Toast.makeText(getApplicationContext(), "Not accepted number! Max number = " + Integer.MAX_VALUE,
+                                Toast.LENGTH_LONG).show();
                     }
                 }
             }
@@ -77,10 +90,23 @@ public class MyActivity extends AppCompatActivity {
                             Toast.LENGTH_LONG).show();
                 }
                 else {
-                    area = Integer.parseInt(txtarea.getText().toString());
-                    ok.setEnabled(false);
-                    Toast.makeText(getApplicationContext(), "Please start a new game! Area set: 1 - " + area,
-                            Toast.LENGTH_LONG).show();
+                    try {
+                        if (Integer.parseInt(txtarea.getText().toString())>0) {
+                            area = Integer.parseInt(txtarea.getText().toString());
+                            ok.setEnabled(false);
+                            Toast.makeText(getApplicationContext(), "Please start a new game! Area set: 1 - " + area,
+                                    Toast.LENGTH_LONG).show();
+                        }
+                        else{
+                            Toast.makeText(getApplicationContext(), "You can type numbers only from 1.",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    }
+                    catch(NumberFormatException e)
+                    {
+                        Toast.makeText(getApplicationContext(), "Not accepted number! Max number = " + Integer.MAX_VALUE,
+                                Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         });
